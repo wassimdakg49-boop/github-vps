@@ -1,12 +1,14 @@
 @echo off
 setlocal
 title VPS Start
-set "NAME=jubilant-parakeet-r77jxgr4vxrxfp69w"
+set "NAME=gnome-vps-vp6x5vgxj4r7fp46g"
 
-echo [1/3] Making sure the VPS codespace is started...
-gh codespace start -c %NAME% >nul 2>&1
+echo [1/2] Waking the VPS codespace...
+gh api -X POST "user/codespaces/%NAME%/start" >nul 2>&1
+echo     (starting - can take a minute)
+ping -n 11 127.0.0.1 >nul
 
-echo [2/3] Starting desktop + cloudflare tunnel...
+echo [2/2] Starting desktop + cloudflare tunnel, then printing your link...
 :retry
 gh codespace ssh -c %NAME% -- vps-start
 if errorlevel 1 (
@@ -16,6 +18,6 @@ if errorlevel 1 (
 )
 
 echo.
-echo [3/3] Done. Open the VPS URL above in your browser (add /vnc.html).
+echo Done. Open the URL printed above in your browser.
 echo.
 pause

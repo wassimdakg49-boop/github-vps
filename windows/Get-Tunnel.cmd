@@ -1,7 +1,7 @@
 @echo off
 setlocal
 title VPS Tunnel Link
-set "NAME=jubilant-parakeet-r77jxgr4vxrxfp69w"
+set "NAME=gnome-vps-vp6x5vgxj4r7fp46g"
 
 echo Getting current VPS link...
 :retry

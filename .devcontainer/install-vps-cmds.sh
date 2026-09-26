@@ -20,7 +20,7 @@ bash /workspaces/github-vps/.devcontainer/ensure-vps.sh 2>/dev/null || true
 echo "=== cloudflare tunnel ==="
 $CF_BLOCK
 if ! pgrep -f "cloudflared tunnel --url http://localhost:6080" >/dev/null 2>&1; then
-  setsid nohup "$CF" tunnel --url http://localhost:6080 --no-autoupdate > /tmp/cloudflared.log 2>&1 < /dev/null &
+  setsid nohup "\$CF" tunnel --url http://localhost:6080 --no-autoupdate > /tmp/cloudflared.log 2>&1 < /dev/null &
   echo "tunnel starting..."
 else
   echo "tunnel already running"
@@ -42,7 +42,7 @@ cat > /tmp/vps-tunnel-body <<BODY_END
 #!/bin/bash
 $CF_BLOCK
 if ! pgrep -f "cloudflared tunnel --url http://localhost:6080" >/dev/null 2>&1; then
-  setsid nohup "$CF" tunnel --url http://localhost:6080 --no-autoupdate > /tmp/cloudflared.log 2>&1 < /dev/null &
+  setsid nohup "\$CF" tunnel --url http://localhost:6080 --no-autoupdate > /tmp/cloudflared.log 2>&1 < /dev/null &
 fi
 U=""
 for i in \$(seq 1 40); do
